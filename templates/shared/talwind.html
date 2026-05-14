@@ -1,0 +1,45 @@
+{% load static %}
+
+<!-- Google Fonts -->
+<link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@500;700&display=swap"
+    rel="stylesheet"
+/>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Tailwind CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Tailwind Config -->
+<script>
+    tailwind.config = {
+        darkMode: 'class',
+
+        theme: {
+            extend: {
+
+                colors: {
+                    primary: '#8b5cf6',
+                    secondary: '#06b6d4',
+
+                    background: '#0f172a',
+                    surface: '#1e293b',
+
+                    success: '#22c55e',
+                    danger: '#ef4444',
+                    warning: '#f59e0b',
+                },
+
+                fontFamily: {
+                    title: ['Orbitron', 'sans-serif'],
+                    body: ['Poppins', 'sans-serif'],
+                },
+
+                boxShadow: {
+                    glow: '0 0 15px rgba(139, 92, 246, 0.5)',
+                }
+            }
+        }
+    }
+</script>
