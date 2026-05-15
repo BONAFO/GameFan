@@ -69,7 +69,7 @@ class SignUpForm(forms.Form):
 
     def clean_nickname(self):
         nickname = self.cleaned_data["nickname"]
-        
+
         print(User.objects.filter(username=nickname).exists())
 
         if User.objects.filter(username=nickname).exists():
@@ -97,3 +97,26 @@ class SignUpForm(forms.Form):
             raise ValidationError("Las contraseñas no coinciden.")
 
         return cleaned_data
+
+
+class LoginForm(forms.Form):
+
+    identifier = forms.CharField(
+        label="Usuario o Email",
+        widget=forms.TextInput(
+            attrs={
+                "class": "w-full rounded-lg bg-zinc-900 border border-zinc-700 px-4 py-3 text-white focus:outline-none focus:border-primary",
+                "placeholder": "Usuario o Email",
+            }
+        ),
+    )
+
+    password = forms.CharField(
+        label="Contraseña",
+        widget=forms.PasswordInput(
+            attrs={
+                "class": "w-full rounded-lg bg-zinc-900 border border-zinc-700 px-4 py-3 text-white focus:outline-none focus:border-primary",
+                "placeholder": "Contraseña",
+            }
+        ),
+    )

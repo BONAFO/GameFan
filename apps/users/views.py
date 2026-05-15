@@ -1,9 +1,10 @@
 from django.views.generic import FormView
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
-from django.contrib.auth import login
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.views import LogoutView
 
-from .forms import SignUpForm
+from .forms import SignUpForm , LoginForm
 from apps.users.models import Profile
 
 
@@ -33,10 +34,52 @@ class SignUpView(FormView):
 
         return super().form_valid(form)
     
-from django.contrib.auth.views import LogoutView
-from django.urls import reverse_lazy
+
 
 
 class LogoutView(LogoutView):
     next_page = reverse_lazy('home:home')
-    
+
+
+class LoginView(FormView):
+
+    template_name = "users/login.html"
+    form_class = LoginForm
+    success_url = reverse_lazy("home:home")
+
+    def form_valid(self, form):
+
+        identifier = form.cleaned_data["identifier"]
+        password = form.cleaned_data["password"]
+
+        user = None
+
+        if "@" in identifier:
+            
+            try:
+                user_obj = User.objects.get(email=identifier)
+                username = user_obj.username
+                user = authenticate(
+                    self.request,
+                    username=username,
+                    password=password
+                )
+            except User.DoesNotExist:
+                user = None
+
+        else:
+
+            user = authenticate(
+                self.request,
+                username=identifier,
+                password=password
+            )
+
+        if user is None:
+
+            form.add_error(None, "Credenciales inválidas")
+            return self.form_invalid(form)
+
+        login(self.request, user)
+
+        return super().form_valid(form)
