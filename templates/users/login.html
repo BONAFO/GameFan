@@ -1,0 +1,59 @@
+{% extends "base/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="min-h-screen flex items-center justify-center bg-background px-4">
+
+  <div class="w-full max-w-md bg-surface border border-zinc-700 rounded-xl p-6">
+
+    <h1 class="text-2xl font-title text-primary mb-6 text-center">
+      Iniciar Sesión
+    </h1>
+
+    <form method="post" class="space-y-5">
+      {% csrf_token %}
+
+      {% if form.non_field_errors %}
+        <div class="rounded-lg border border-red-500 bg-red-500/10 p-3 text-red-400 text-sm">
+          {{ form.non_field_errors }}
+        </div>
+      {% endif %}
+
+      <div>
+        <label class="block mb-2 text-sm text-zinc-300">
+          {{ form.identifier.label }}
+        </label>
+
+        {{ form.identifier }}
+
+      </div>
+
+   <div class="relative">
+      {{ form.password }}
+
+        <button
+            type="button"
+            class="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-primary toggle-password"
+        >
+            👁
+        </button>
+        </div>
+
+      <button
+        type="submit"
+        class="w-full bg-primary hover:opacity-90 transition text-white py-3 rounded-lg"
+      >
+        Entrar
+      </button>
+
+    </form>
+
+  </div>
+
+  <script src="{% static 'users/js/showPassword.js' %}"></script>
+
+</div>
+
+{% endblock %}
