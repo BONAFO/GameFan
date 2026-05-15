@@ -1,16 +1,12 @@
 {% extends 'base/base.html' %}
 
-{% block title %}
-Home - GameForum
-{% endblock %}
-
 {% block content %}
 
 
 <section class="flex flex-col items-center justify-center text-center py-20">
 
     <h1 class="text-5xl md:text-6xl font-title text-primary mb-4">
-        GameForum
+        {% include 'base/title.html' %}
     </h1>
 
     <p class="text-zinc-400 text-lg max-w-2xl">
