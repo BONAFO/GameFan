@@ -30,7 +30,7 @@
           href="#"
           class="relative group text-zinc-300 hover:text-primary transition"
         >
-          Contribuir
+          Registrar Juego
           <span
             class="absolute left-0 -bottom-1 w-full h-[2px] bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-left shadow-[0_0_10px_rgba(139,92,246,0.8)]"
           ></span>
@@ -40,7 +40,7 @@
           href="#"
           class="relative group text-zinc-300 hover:text-primary transition"
         >
-          Foro
+          Donar
           <span
             class="absolute left-0 -bottom-1 w-full h-[2px] bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-left shadow-[0_0_10px_rgba(139,92,246,0.8)]"
           ></span>
@@ -48,7 +48,6 @@
       </div>
 
       {% if user.is_authenticated %}
-      <section id="user-dropdown">
         <div class="relative">
           <button
             id="user-menu-button"
@@ -104,16 +103,18 @@
             </a>
 
             <div class="border-t border-zinc-700"></div>
+                <form method="post" action="{% url 'users:logout' %}">
+                  {% csrf_token %}
 
-            <a
-              href="#"
-              class="block px-4 py-3 text-red-400 hover:bg-zinc-800 transition"
-            >
-              Cerrar sesión
-            </a>
+                  <button
+                    type="submit"
+                    class="block w-full text-left px-4 py-3 text-red-400 hover:bg-zinc-800 transition"
+                  >
+                    Cerrar sesión
+                  </button>
+                </form>
           </div>
         </div>
-      </section>
 
       {% else %}
       <section id="new-user">
@@ -147,7 +148,7 @@
           </a>
 
           <a
-            href="#"
+            href="{% url "users:signup" %}"
             class="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary hover:opacity-90 transition text-white"
           >
             <svg
