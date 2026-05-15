@@ -24,6 +24,8 @@ staticfiles/
 .vscode/
 .idea/
 
+*.bk.py
+
 # OS files
 .DS_Store
 Thumbs.db

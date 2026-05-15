@@ -1,0 +1,91 @@
+
+{% extends 'base/base.html' %} 
+
+{% load static %}
+
+{% block title %} Home - GameForum {% endblock %}
+
+{% block content %}
+
+<form method="POST" class="space-y-6">
+  {% csrf_token %}
+
+  {% for field in form %}
+
+    {% if field.errors %}
+      <div class="mb-4 rounded-lg border border-red-500 bg-red-500/10 p-4 text-red-400">
+        <strong>{{ field.label }}</strong>
+
+        {{ field.errors }}
+      </div>
+    {% endif %}
+
+  {% endfor %}
+
+
+  <div class="space-y-2">
+    <label class="block text-center font-medium text-zinc-300">
+      {{ form.nickname.label }} 
+    </label>
+
+    {{ form.nickname }}
+  </div>
+
+  <div class="space-y-2">
+    <label class="block text-center font-medium text-zinc-300">
+      {{ form.email.label }}
+    </label>
+
+    {{ form.email }}
+  </div>
+
+  <div class="space-y-2">
+    <label class="block text-center font-medium text-zinc-300">
+      {{ form.password.label }}
+    </label>
+
+    <div class="relative">
+      {{ form.password }}
+
+      <button
+        type="button"
+        class="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-primary toggle-password"
+      >
+        👁
+      </button>
+    </div>
+  </div>
+
+  <div class="space-y-2">
+    <label class="block text-center font-medium text-zinc-300">
+      {{ form.repeat_password.label }}
+    </label>
+    <div class="relative">
+      {{ form.repeat_password }}
+
+      <button
+        type="button"
+        class="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-primary toggle-password"
+      >
+        👁
+      </button>
+    </div>
+  </div>
+
+  <div class="space-y-3">
+    <div class="flex items-center justify-center gap-6 text-zinc-300">
+      {{ form.is_adult }}
+    </div>
+  </div>
+
+  <button
+    type="submit"
+    class="w-full rounded-lg bg-primary py-3 font-medium text-white hover:opacity-90 transition"
+  >
+    Crear Cuenta
+  </button>
+</form>
+
+<script src="{% static 'users/js/showPassword.js' %}"></script>
+
+{% endblock %}
